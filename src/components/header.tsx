@@ -77,12 +77,12 @@ export function Header() {
               <span className="relative z-10">{section.label}</span>
             </a>
           ))}
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </nav>
 
         {/* Mobile menu button */}
         <div className="flex items-center md:hidden gap-2">
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
           <Button 
             variant="ghost" 
             size="icon" 

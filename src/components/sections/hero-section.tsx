@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 export function HeroSection() {
   const [cipherText, setCipherText] = useState("");
   const [animationComplete, setAnimationComplete] = useState(false);
-  const [displayText, setDisplayText] = useState("ENIGMA");
-  const plainText = "ENIGMA";
+  const [displayText, setDisplayText] = useState("SHUBH GOYAL");
+  const plainText = "SHUBH GOYAL";
   const alternateName = "SHUBH GOYAL";
   
   // Initial cipher animation
@@ -133,24 +133,24 @@ export function HeroSection() {
           
           <div className="order-1 md:order-2 flex justify-center">
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border border-primary/20 shadow-xl perspective">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
+              <div className="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden border border-primary/20 shadow-xl perspective">
                 <div className="w-full h-full transition-all duration-700 transform preserve-3d group-hover:rotate-y-180">
                   {/* Front side - Logo */}
                   <div className="absolute w-full h-full backface-hidden">
                     <img 
-                      src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+                      src="src/data/logo.png"
                       alt="Logo" 
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-enigma-dark/50 mix-blend-color"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-enigma-dark/80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b"></div>
                   </div>
                   
                   {/* Back side - Profile Photo (shows on hover) */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180">
                     <img 
-                      src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+                      src="src/data/me2.jpg"
                       alt="Profile Photo" 
                       className="w-full h-full object-cover"
                     />

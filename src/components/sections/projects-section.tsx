@@ -202,7 +202,7 @@ export function ProjectsSection() {
           Notable implementations and code specimens
         </div>
         <div className="font-mono text-lg text-primary mb-12 inline-block border-b border-primary/30 pb-1">
-          shit I have done
+          Shit I Have Accomplished
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

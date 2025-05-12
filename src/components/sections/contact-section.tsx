@@ -87,12 +87,12 @@ export function ContactSection() {
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-mono tracking-wide mb-1">Email Me</h3>
+                  <h3 className="text-lg font-mono tracking-wide mb-1">Email Me At</h3>
                   <a 
-                    href="mailto:hello@enigma.dev" 
+                    href="mailto:goyal.shubh0711@gmail.com" 
                     className="text-muted-foreground hover:text-primary transition-colors font-light flex items-center gap-1"
                   >
-                    <span>hello@enigma.dev</span>
+                    <span>goyal.shubh0711@gmail.com</span>
                     <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                 </div>
@@ -107,12 +107,12 @@ export function ContactSection() {
                 <div>
                   <h3 className="text-lg font-mono tracking-wide mb-1">WhatsApp Me</h3>
                   <a 
-                    href="https://wa.me/1234567890" 
+                    href="https://wa.me/8889722887" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors font-light flex items-center gap-1"
                   >
-                    <span>+1 (234) 567-890</span>
+                    <span>+91 8889722887</span>
                     <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                 </div>
