@@ -1,6 +1,7 @@
 
 import { cn } from "@/lib/utils";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, ChevronRight, Code, Lock } from "lucide-react";
+import { useState } from "react";
 
 interface ProjectCardProps {
   title: string;
@@ -12,34 +13,73 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: ProjectCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
-    <div className="project-card rounded-xl overflow-hidden relative">
+    <div 
+      className="project-card rounded-xl overflow-hidden relative group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Tech-inspired card patterns */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-enigma-dark via-transparent to-transparent opacity-80"></div>
+        <div className="absolute top-4 right-4 font-mono text-xs opacity-30">
+          {Array.from({length: 3}).map((_, i) => (
+            <div key={i}>{Math.random().toString(36).substring(2, 8)}</div>
+          ))}
+        </div>
+        <div className="absolute bottom-4 left-4 font-mono text-xs opacity-30">
+          {Array.from({length: 2}).map((_, i) => (
+            <div key={i}>{Math.random().toString(16).substring(2, 10)}</div>
+          ))}
+        </div>
+      </div>
+      
       <div className="relative h-48 overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          className={cn(
+            "w-full h-full object-cover transition-all duration-700",
+            isHovered ? "scale-110 blur-sm" : ""
+          )}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-enigma-dark"></div>
+        
+        {/* Top border glow */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+        
+        {/* Project technology tags shown on hover */}
+        <div className={cn(
+          "absolute inset-0 flex items-center justify-center flex-col p-6 bg-enigma-dark/80 backdrop-blur-sm",
+          "transition-opacity duration-300",
+          isHovered ? "opacity-100" : "opacity-0"
+        )}>
+          <div className="text-sm font-mono text-primary/80 mb-2">// PROJECT STACK</div>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2 py-1 text-xs font-mono rounded-sm bg-primary/10 text-primary border border-primary/20"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
       
       <div className="p-6 relative z-10">
-        <h3 className="text-xl font-display font-bold mb-2 group-hover:text-primary">
+        <div className="font-mono text-xs text-primary/60 mb-1">
+          &lt;project&gt;
+        </div>
+        
+        <h3 className="text-xl font-mono tracking-wide mb-3 group-hover:text-primary transition-colors duration-300">
           {title}
         </h3>
         
-        <div className="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary-foreground/80"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        
-        <p className="text-muted-foreground mb-6">{description}</p>
+        <p className="text-muted-foreground mb-6 font-light">{description}</p>
         
         <div className="flex items-center space-x-4">
           <a
@@ -47,12 +87,14 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "flex items-center space-x-1 text-sm",
-              "hover:text-primary transition-colors"
+              "flex items-center space-x-2 text-sm font-mono",
+              "hover:text-primary transition-all duration-300 group/link",
+              "border-b border-transparent hover:border-primary/50 pb-1"
             )}
           >
             <Github className="h-4 w-4" />
-            <span>GitHub</span>
+            <span>Source</span>
+            <ChevronRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
           </a>
           
           {liveUrl && (
@@ -61,14 +103,20 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "flex items-center space-x-1 text-sm",
-                "hover:text-primary transition-colors"
+                "flex items-center space-x-2 text-sm font-mono",
+                "hover:text-primary transition-all duration-300 group/link",
+                "border-b border-transparent hover:border-primary/50 pb-1"
               )}
             >
               <ExternalLink className="h-4 w-4" />
-              <span>Live Demo</span>
+              <span>Demo</span>
+              <ChevronRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
             </a>
           )}
+        </div>
+        
+        <div className="font-mono text-xs text-primary/60 mt-4">
+          &lt;/project&gt;
         </div>
       </div>
     </div>
@@ -112,14 +160,49 @@ export function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-20 min-h-screen"
+      className="py-20 min-h-screen relative"
     >
-      <div className="container">
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">
-          My <span className="text-primary">Projects</span>
+      {/* Circuit pattern in background */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <svg className="absolute h-full w-full opacity-5" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path stroke="currentColor" strokeWidth="0.2" fill="none" d="M0,0 L100,0 L100,100 L0,100 Z" />
+          <path stroke="currentColor" strokeWidth="0.2" fill="none" d="M0,0 L100,100" />
+          <path stroke="currentColor" strokeWidth="0.2" fill="none" d="M100,0 L0,100" />
+          {/* Horizontal lines */}
+          {Array.from({length: 10}).map((_, i) => (
+            <path 
+              key={`h-${i}`} 
+              stroke="currentColor" 
+              strokeWidth="0.1" 
+              fill="none" 
+              d={`M0,${i * 10} L100,${i * 10}`} 
+            />
+          ))}
+          {/* Vertical lines */}
+          {Array.from({length: 10}).map((_, i) => (
+            <path 
+              key={`v-${i}`} 
+              stroke="currentColor" 
+              strokeWidth="0.1" 
+              fill="none" 
+              d={`M${i * 10},0 L${i * 10},100`} 
+            />
+          ))}
+        </svg>
+      </div>
+
+      <div className="container z-10 relative">
+        <div className="font-mono text-sm text-primary opacity-80 mb-2">
+          &lt;section id="projects"&gt;
+        </div>
+        <h2 className="text-4xl md:text-5xl font-mono font-bold mb-2">
+          Projects<span className="text-primary">_</span>
         </h2>
+        <div className="font-mono text-xs text-muted-foreground mb-12">
+          Notable implementations and code specimens
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <ProjectCard
               key={index}
@@ -131,6 +214,10 @@ export function ProjectsSection() {
               tags={project.tags}
             />
           ))}
+        </div>
+        
+        <div className="font-mono text-sm text-primary opacity-80 mt-12">
+          &lt;/section&gt;
         </div>
       </div>
     </section>

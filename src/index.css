@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -95,63 +95,87 @@
     animation: blink 1s step-end infinite;
   }
 
+  /* Tech-savvy Enigma styling */
   .enigma-card {
-    background: rgba(155, 135, 245, 0.05);
+    background: rgba(26, 31, 44, 0.3);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(155, 135, 245, 0.2);
-    transition: all 0.3s ease;
-  }
-  
-  .dark .enigma-card {
-    background: rgba(155, 135, 245, 0.05);
-    border: 1px solid rgba(155, 135, 245, 0.2);
-  }
-  
-  .enigma-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px -10px rgba(155, 135, 245, 0.3);
-  }
-  
-  .dark .enigma-card:hover {
-    box-shadow: 0 10px 30px -10px rgba(155, 135, 245, 0.2);
-  }
-  
-  .project-card {
-    background: linear-gradient(120deg, rgba(155, 135, 245, 0.05) 0%, rgba(155, 135, 245, 0.1) 100%);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(155, 135, 245, 0.2);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(155, 135, 245, 0.1);
+    transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    position: relative;
     overflow: hidden;
   }
   
+  .dark .enigma-card {
+    background: rgba(26, 31, 44, 0.5);
+  }
+  
+  .enigma-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px -10px rgba(155, 135, 245, 0.2);
+    border-color: rgba(155, 135, 245, 0.3);
+  }
+  
+  .project-card {
+    background: rgba(26, 31, 44, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(155, 135, 245, 0.1);
+    transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    overflow: hidden;
+    position: relative;
+  }
+  
   .dark .project-card {
-    background: linear-gradient(120deg, rgba(155, 135, 245, 0.05) 0%, rgba(155, 135, 245, 0.1) 100%);
-  }
-  
-  .project-card::before {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(155, 135, 245, 0.2), transparent);
-    transition: all 0.6s ease;
-    transform: rotate(45deg);
-  }
-  
-  .project-card:hover::before {
-    top: 100%;
-    left: 100%;
+    background: rgba(26, 31, 44, 0.8);
   }
   
   .project-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 30px -15px rgba(155, 135, 245, 0.4);
-    border: 1px solid rgba(155, 135, 245, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -15px rgba(155, 135, 245, 0.3);
+    border: 1px solid rgba(155, 135, 245, 0.3);
   }
   
-  .dark .project-card:hover {
-    box-shadow: 0 15px 30px -15px rgba(155, 135, 245, 0.3);
+  /* Matrix-like text animation */
+  @keyframes matrixDrip {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(1000%);
+      opacity: 0;
+    }
+  }
+  
+  .matrix-text {
+    position: absolute;
+    color: rgba(155, 135, 245, 0.7);
+    font-family: 'JetBrains Mono', monospace;
+    animation: matrixDrip 8s linear infinite;
+    user-select: none;
+  }
+  
+  /* Enigma pulse effect */
+  @keyframes enigma-pulse {
+    0%, 100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  .enigma-pulse {
+    animation: enigma-pulse 3s ease-in-out infinite;
+  }
+  
+  /* Tech grid background */
+  .tech-grid {
+    background-image: 
+      linear-gradient(rgba(155, 135, 245, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155, 135, 245, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 }
