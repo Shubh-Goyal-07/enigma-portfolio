@@ -1,6 +1,6 @@
 
 import { cn } from "@/lib/utils";
-import { Code, Database, Globe, Terminal, Cpu, Tool } from "lucide-react";
+import { Code, Database, Globe, Terminal, Cpu, Wrench } from "lucide-react";
 
 interface SkillCategoryProps {
   title: string;
@@ -159,7 +159,7 @@ export function ResumeSection() {
             <SkillCategory 
               title="Tools & Platforms" 
               skills={skills.tools} 
-              icon={<Tool className="h-5 w-5" />}
+              icon={<Wrench className="h-5 w-5" />}
             />
           </div>
         </div>
