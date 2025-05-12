@@ -198,8 +198,11 @@ export function ProjectsSection() {
         <h2 className="text-4xl md:text-5xl font-mono font-bold mb-2">
           Projects<span className="text-primary">_</span>
         </h2>
-        <div className="font-mono text-xs text-muted-foreground mb-12">
+        <div className="font-mono text-xs text-muted-foreground mb-4">
           Notable implementations and code specimens
+        </div>
+        <div className="font-mono text-lg text-primary mb-12 inline-block border-b border-primary/30 pb-1">
+          shit I have done
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -1,3 +1,4 @@
+
 import { Typewriter } from "@/components/typewriter";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -6,8 +7,11 @@ import { useEffect, useState } from "react";
 export function HeroSection() {
   const [cipherText, setCipherText] = useState("");
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [displayText, setDisplayText] = useState("ENIGMA");
   const plainText = "ENIGMA";
+  const alternateName = "SHUBH GOYAL";
   
+  // Initial cipher animation
   useEffect(() => {
     if (animationComplete) {
       setCipherText(plainText);
@@ -42,6 +46,17 @@ export function HeroSection() {
     return () => clearInterval(interval);
   }, [animationComplete]);
 
+  // Text flip animation between ENIGMA and SHUBH GOYAL
+  useEffect(() => {
+    if (!animationComplete) return;
+    
+    const flipInterval = setInterval(() => {
+      setDisplayText(current => current === plainText ? alternateName : plainText);
+    }, 5000); // Flip every 5 seconds
+    
+    return () => clearInterval(flipInterval);
+  }, [animationComplete]);
+  
   return (
     <section
       id="about"
@@ -80,7 +95,7 @@ export function HeroSection() {
             </div>
             
             <h1 className="font-mono text-5xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight">
-              <span className="font-mono text-primary tracking-widest">{cipherText}</span>
+              <span className="font-mono text-primary tracking-widest">{!animationComplete ? cipherText : displayText}</span>
               <span className="sr-only">Enigma</span>
             </h1>
             
@@ -90,7 +105,7 @@ export function HeroSection() {
             
             <div className="px-4 py-3 border border-primary/30 bg-enigma-dark/30 backdrop-blur-sm rounded-md inline-block mb-6">
               <blockquote className="italic font-light text-lg">
-                "Life is simple<span className="text-primary">_</span>"
+                "In the symphony of chaos, I find patterns; in the noise, I decode signals."
               </blockquote>
             </div>
             
@@ -119,16 +134,31 @@ export function HeroSection() {
           <div className="order-1 md:order-2 flex justify-center">
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border border-primary/20 shadow-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
-                  alt="Profile" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-enigma-dark/50 mix-blend-color"></div>
+              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border border-primary/20 shadow-xl perspective">
+                <div className="w-full h-full transition-all duration-700 transform preserve-3d group-hover:rotate-y-180">
+                  {/* Front side - Logo */}
+                  <div className="absolute w-full h-full backface-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+                      alt="Logo" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-enigma-dark/50 mix-blend-color"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-enigma-dark/80"></div>
+                  </div>
+                  
+                  {/* Back side - Profile Photo (shows on hover) */}
+                  <div className="absolute w-full h-full backface-hidden rotate-y-180">
+                    <img 
+                      src="https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+                      alt="Profile Photo" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-enigma-dark/80"></div>
+                  </div>
+                </div>
                 
                 {/* Digital overlay effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-enigma-dark/80"></div>
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
                   {Array.from({length: 20}).map((_, i) => (
                     <div 

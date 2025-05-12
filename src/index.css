@@ -78,6 +78,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Typewriter effect styling */
   .typewriter {
     position: relative;
     width: fit-content;
@@ -93,6 +94,23 @@
     width: 2px;
     background-color: currentColor;
     animation: blink 1s step-end infinite;
+  }
+
+  /* 3D flip effect for profile image */
+  .perspective {
+    perspective: 1000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .rotate-y-180 {
+    transform: rotateY(180deg);
   }
 
   /* Tech-savvy Enigma styling */
