@@ -1,4 +1,3 @@
-
 import { Typewriter } from "@/components/typewriter";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -6,21 +5,42 @@ import { useEffect, useState } from "react";
 
 export function HeroSection() {
   const [cipherText, setCipherText] = useState("");
+  const [animationComplete, setAnimationComplete] = useState(false);
   const plainText = "ENIGMA";
   
   useEffect(() => {
+    if (animationComplete) {
+      setCipherText(plainText);
+      return;
+    }
+
+    const startTime = Date.now();
+    const animationDuration = 5000; // 5 seconds of randomization before settling
+
     const interval = setInterval(() => {
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       let result = "";
+      
+      const elapsedTime = Date.now() - startTime;
+      const progress = Math.min(elapsedTime / animationDuration, 1);
+      
       for (let i = 0; i < plainText.length; i++) {
-        const randomChar = chars.charAt(Math.floor(Math.random() * chars.length));
-        result += Math.random() > 0.7 ? plainText[i] : randomChar;
+        // As progress increases, increase chance of showing correct letter
+        const showCorrectChar = Math.random() < progress * 1.5 || (progress > 0.8 && Math.random() > 0.2);
+        result += showCorrectChar ? plainText[i] : chars.charAt(Math.floor(Math.random() * chars.length));
       }
+      
       setCipherText(result);
+      
+      // Check if animation should complete
+      if (progress >= 1 && result === plainText) {
+        clearInterval(interval);
+        setAnimationComplete(true);
+      }
     }, 150);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [animationComplete]);
 
   return (
     <section

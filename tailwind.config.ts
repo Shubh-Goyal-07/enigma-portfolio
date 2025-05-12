@@ -59,7 +59,7 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				enigma: {
-					dark: '#1A1F2C',
+					dark: '#000000',
 					accent: '#9b87f5',
 					secondary: '#7E69AB',
 					light: '#F1F0FB',
