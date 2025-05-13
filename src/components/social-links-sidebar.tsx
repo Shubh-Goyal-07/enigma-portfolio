@@ -32,7 +32,7 @@ export function SocialLinksSidebar() {
       >
         <Instagram className="h-5 w-5" />
       </a>
-      <div className="h-16 w-px bg-primary/50"></div>
+      <div className="h-24 w-px bg-primary/50 mt-2"></div>
     </div>
   );
 }
