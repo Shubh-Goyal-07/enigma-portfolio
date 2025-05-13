@@ -1,31 +1,46 @@
 
 import { cn } from "@/lib/utils";
-import { Code, Database, Globe, Terminal, Cpu, Wrench } from "lucide-react";
+import { Code, Terminal, Award, Briefcase } from "lucide-react";
 
-interface SkillCategoryProps {
-  title: string;
-  skills: string[];
-  icon: React.ReactNode;
+interface ExperienceProps {
+  company: string;
+  role: string;
+  duration: string;
+  description: string[];
+  index: number;
 }
 
-function SkillCategory({ title, skills, icon }: SkillCategoryProps) {
+function Experience({ company, role, duration, description, index }: ExperienceProps) {
   return (
-    <div className="group enigma-card rounded-lg p-6 border-t border-primary/20 bg-gradient-to-br from-enigma-dark/70 to-enigma-dark">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="text-primary p-2 rounded-md bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
-          {icon}
-        </div>
-        <h3 className="text-xl font-mono tracking-wider">{title}</h3>
+    <div className="enigma-card rounded-lg p-6 hover:border-primary/30 relative overflow-hidden group">
+      {/* Terminal-like header */}
+      <div className="font-mono text-xs mb-3 opacity-80 flex items-center gap-2">
+        <Briefcase className="h-3.5 w-3.5" />
+        <span className="text-primary">[experience@arch ~]$</span> cat experience_{index}.log <span className="animate-pulse">_</span>
       </div>
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill) => (
-          <span
-            key={skill}
-            className="px-3 py-1 rounded-md bg-primary/5 border border-primary/10 text-sm font-mono hover:bg-primary/10 transition-colors duration-300"
-          >
-            {skill}
-          </span>
-        ))}
+      
+      <div className="flex flex-col">
+        <h3 className="text-lg font-mono tracking-wide mb-1 group-hover:text-primary transition-colors duration-300">
+          {role} <span className="text-primary">@</span> {company}
+        </h3>
+        
+        <div className="text-sm text-muted-foreground font-mono mb-3">
+          {duration}
+        </div>
+        
+        <ul className="list-none space-y-2">
+          {description.map((item, i) => (
+            <li key={i} className="text-muted-foreground font-light flex items-start gap-2">
+              <span className="text-primary mt-1">$</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      {/* Terminal pattern background */}
+      <div className="absolute -bottom-2 -right-2 text-primary/5 font-mono text-6xl pointer-events-none">
+        {index}
       </div>
     </div>
   );
@@ -41,8 +56,9 @@ function Achievement({ title, description, index }: AchievementProps) {
   return (
     <div className="enigma-card rounded-lg p-6 hover:border-primary/30 relative overflow-hidden group">
       {/* Terminal-like header */}
-      <div className="font-mono text-xs mb-3 opacity-80">
-        [achievement_<span className="text-primary">{index}</span>]$ <span className="animate-pulse">_</span>
+      <div className="font-mono text-xs mb-3 opacity-80 flex items-center gap-2">
+        <Award className="h-3.5 w-3.5" />
+        <span className="text-primary">[achievement@arch ~]$</span> cat achievement_{index}.log <span className="animate-pulse">_</span>
       </div>
       
       <h3 className="text-lg font-mono tracking-wide mb-2 group-hover:text-primary transition-colors duration-300">
@@ -62,12 +78,18 @@ function Achievement({ title, description, index }: AchievementProps) {
 }
 
 export function ResumeSection() {
-  const skills = {
-    lang: ["Python", "JavaScript", "TypeScript", "C++"],
-    web: ["React", "TypeScript", "NextJS", "NodeJS", "Express", "MongoDB", "SQL"],
-    ai: ["PyTorch", "TensorFlow", "HUggingFace", "Scikit-learn"],
-    tools: ["Git/GitHub", "Docker", "CI/CD", "AWS", "Figma"]
-  };
+  const experiences = [
+    {
+      company: "Tech Corp",
+      role: "AI Research Intern",
+      duration: "Jun 2023 - Aug 2023",
+      description: [
+        "Developed neural network architectures for image recognition tasks, achieving 15% performance improvement.",
+        "Implemented data preprocessing pipelines that reduced training time by 30%.",
+        "Collaborated with senior researchers to publish findings at industry conferences."
+      ]
+    }
+  ];
 
   const achievements = [
     {
@@ -93,9 +115,40 @@ export function ResumeSection() {
       id="resume"
       className="py-20 min-h-screen flex items-center relative"
     >
-      {/* Technical background elements */}
+      {/* Terminal-like background elements */}
       <div className="absolute inset-0 z-0 opacity-5 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
+          {/* Random terminal commands as background decorations */}
+          {Array.from({length: 15}).map((_, i) => (
+            <div 
+              key={i} 
+              className="absolute font-mono text-xs"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                opacity: 0.6,
+                transform: `scale(${0.8 + Math.random() * 0.4})`,
+              }}
+            >
+              {[
+                'cd ~/projects',
+                'nvim main.py',
+                'git commit -m "fix"',
+                'sudo pacman -Syu',
+                'ssh server@192.168.1.1',
+                'python -m venv env',
+                'docker-compose up -d',
+                'systemctl start nginx',
+                'cat ~/.zshrc',
+                './deploy.sh',
+                'npm run build',
+                'curl https://api.example.com',
+                'ls -la',
+                'make install',
+                'grep -r "TODO" .'
+              ][i % 15]}
+            </div>
+          ))}
           {Array.from({length: 20}).map((_, i) => (
             <div 
               key={i} 
@@ -126,46 +179,38 @@ export function ResumeSection() {
       <div className="container z-10">
         <div className="mb-12">
           <div className="font-mono text-sm text-primary opacity-80 mb-2">
-            &lt;section id="qualifications"&gt;
+            <Terminal className="inline-block w-4 h-4 mr-1" /> <span className="text-primary">[shubh@arch ~]$</span> cat resume.md
           </div>
           <h2 className="text-4xl md:text-5xl font-mono font-bold mb-2">
             Resume<span className="text-primary">_</span>
           </h2>
           <div className="font-mono text-xs text-muted-foreground mb-12">
-            Technical expertise and accomplishments
+            Experience and accomplishments
           </div>
         </div>
 
         <div className="mb-16">
-          <h3 className="text-2xl font-mono mb-8 border-b border-primary/10 pb-2">
-            Tech<span className="text-primary">.</span>Stack()
+          <h3 className="text-2xl font-mono mb-8 border-b border-primary/10 pb-2 flex items-center">
+            <Briefcase className="h-5 w-5 mr-2 text-primary" />
+            Experience<span className="text-primary">.</span>log()
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <SkillCategory 
-              title="Languages" 
-              skills={skills.lang} 
-              icon={<Database className="h-5 w-5" />}
-            />
-            <SkillCategory 
-              title="Web Development" 
-              skills={skills.web} 
-              icon={<Globe className="h-5 w-5" />}
-            />
-            <SkillCategory 
-              title="AI & Machine Learning" 
-              skills={skills.ai} 
-              icon={<Cpu className="h-5 w-5" />}
-            />
-            <SkillCategory 
-              title="Tools & Platforms" 
-              skills={skills.tools} 
-              icon={<Wrench className="h-5 w-5" />}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+            {experiences.map((experience, index) => (
+              <Experience
+                key={index}
+                index={index + 1}
+                company={experience.company}
+                role={experience.role}
+                duration={experience.duration}
+                description={experience.description}
+              />
+            ))}
           </div>
         </div>
 
         <div>
-          <h3 className="text-2xl font-mono mb-8 border-b border-primary/10 pb-2">
+          <h3 className="text-2xl font-mono mb-8 border-b border-primary/10 pb-2 flex items-center">
+            <Award className="h-5 w-5 mr-2 text-primary" />
             Achievements<span className="text-primary">.</span>log()
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -181,7 +226,7 @@ export function ResumeSection() {
         </div>
         
         <div className="font-mono text-sm text-primary opacity-80 mt-12">
-          &lt;/section&gt;
+          <span className="text-muted-foreground">[shubh@arch ~]$</span> <span className="animate-pulse">_</span>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 
 import { cn } from "@/lib/utils";
-import { Github, ExternalLink, ChevronRight, Code, Lock } from "lucide-react";
-import { useState } from "react";
+import { Github, ExternalLink, ChevronRight, Terminal, Lock, ArrowLeft, ArrowRight } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import { 
   Carousel,
   CarouselContent,
@@ -10,6 +10,8 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import useEmblaCarousel from 'embla-carousel-react';
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface ProjectCardProps {
   title: string;
@@ -25,10 +27,22 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
   
   return (
     <div 
-      className="project-card rounded-xl overflow-hidden relative group"
+      className="project-card rounded-xl overflow-hidden relative group h-full flex flex-col"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Terminal-inspired card header */}
+      <div className="absolute top-0 left-0 right-0 h-8 z-10 flex items-center px-3 font-mono text-xs bg-black/50">
+        <span className="mr-auto text-primary opacity-80">
+          <Terminal className="h-3 w-3 inline mr-1" /> ~/projects/{title.toLowerCase().replace(/\s+/g, '-')}
+        </span>
+        <span className="flex gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-500/70"></span>
+          <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70"></span>
+          <span className="h-2.5 w-2.5 rounded-full bg-green-500/70"></span>
+        </span>
+      </div>
+      
       {/* Tech-inspired card patterns */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-enigma-dark via-transparent to-transparent opacity-80"></div>
@@ -44,15 +58,17 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
         </div>
       </div>
       
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          className={cn(
-            "w-full h-full object-cover transition-all duration-700",
-            isHovered ? "scale-110 blur-sm" : ""
-          )}
-        />
+      <div className="relative overflow-hidden pt-8"> {/* Added pt-8 for the terminal header */}
+        <AspectRatio ratio={16/9}>
+          <img
+            src={image}
+            alt={title}
+            className={cn(
+              "w-full h-full object-cover transition-all duration-700",
+              isHovered ? "scale-110 blur-sm" : ""
+            )}
+          />
+        </AspectRatio>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-enigma-dark"></div>
         
         {/* Top border glow */}
@@ -60,11 +76,11 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
         
         {/* Project technology tags shown on hover */}
         <div className={cn(
-          "absolute inset-0 flex items-center justify-center flex-col p-6 bg-enigma-dark/80 backdrop-blur-sm",
+          "absolute inset-0 flex items-center justify-center flex-col p-6 bg-enigma-dark/80 backdrop-blur-sm mt-8", // Added mt-8 for terminal header
           "transition-opacity duration-300",
           isHovered ? "opacity-100" : "opacity-0"
         )}>
-          <div className="text-sm font-mono text-primary/80 mb-2">// PROJECT STACK</div>
+          <div className="text-sm font-mono text-primary/80 mb-2"># project stack</div>
           <div className="flex flex-wrap gap-2 justify-center">
             {tags.map((tag) => (
               <span
@@ -78,16 +94,16 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
         </div>
       </div>
       
-      <div className="p-6 relative z-10">
+      <div className="p-6 relative z-10 flex-1 flex flex-col">
         <div className="font-mono text-xs text-primary/60 mb-1">
-          &lt;project&gt;
+          # project details
         </div>
         
         <h3 className="text-xl font-mono tracking-wide mb-3 group-hover:text-primary transition-colors duration-300">
           {title}
         </h3>
         
-        <p className="text-muted-foreground mb-6 font-light">{description}</p>
+        <p className="text-muted-foreground mb-6 font-light flex-grow">{description}</p>
         
         <div className="flex items-center space-x-4">
           <a
@@ -124,7 +140,7 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
         </div>
         
         <div className="font-mono text-xs text-primary/60 mt-4">
-          &lt;/project&gt;
+          # end of project
         </div>
       </div>
     </div>
@@ -133,6 +149,9 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
 
 export function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [emblaRef, emblaApi] = useEmblaCarousel({ skipSnaps: false, containScroll: "trimSnaps" });
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [totalSlides, setTotalSlides] = useState(0);
   
   const projects = {
     ai: [
@@ -173,6 +192,33 @@ export function ProjectsSection() {
   
   const allProjects = [...projects.ai, ...projects.web];
   const displayProjects = activeCategory === "all" ? allProjects : projects[activeCategory as 'ai' | 'web'];
+  
+  useEffect(() => {
+    if (emblaApi) {
+      const onSelect = () => {
+        setActiveIndex(emblaApi.selectedScrollSnap());
+        setTotalSlides(emblaApi.scrollSnapList().length);
+      };
+      
+      emblaApi.on("select", onSelect);
+      // Initialize values
+      setTotalSlides(emblaApi.scrollSnapList().length);
+      setActiveIndex(emblaApi.selectedScrollSnap());
+      
+      return () => {
+        emblaApi.off("select", onSelect);
+      };
+    }
+    return undefined;
+  }, [emblaApi, activeCategory]);
+  
+  // Reset carousel when changing categories
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.scrollTo(0);
+      setActiveIndex(0);
+    }
+  }, [activeCategory, emblaApi]);
 
   return (
     <section
@@ -210,7 +256,7 @@ export function ProjectsSection() {
 
       <div className="container z-10 relative">
         <div className="font-mono text-sm text-primary opacity-80 mb-2">
-          &lt;section id="projects"&gt;
+          <Terminal className="inline-block w-4 h-4 mr-1" /> <span className="text-primary">[shubh@arch ~]$</span> ls -la ~/projects/
         </div>
         <h2 className="text-4xl md:text-5xl font-mono font-bold mb-2">
           Projects<span className="text-primary">_</span>
@@ -232,29 +278,56 @@ export function ProjectsSection() {
         </div>
         
         {/* Projects carousel */}
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {displayProjects.map((project, index) => (
-              <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/2">
-                <ProjectCard
-                  title={project.title}
-                  description={project.description}
-                  image={project.image}
-                  githubUrl={project.githubUrl}
-                  liveUrl={project.liveUrl}
-                  tags={project.tags}
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="flex justify-end mt-4 gap-2">
-            <CarouselPrevious className="static transform-none" />
-            <CarouselNext className="static transform-none" />
+        <div className="relative">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {displayProjects.map((project, index) => (
+                <div 
+                  key={index} 
+                  className="flex-[0_0_100%] min-w-0 px-4 md:flex-[0_0_50%]"
+                >
+                  <ProjectCard
+                    title={project.title}
+                    description={project.description}
+                    image={project.image}
+                    githubUrl={project.githubUrl}
+                    liveUrl={project.liveUrl}
+                    tags={project.tags}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </Carousel>
+          
+          {/* Navigation and counter */}
+          <div className="flex justify-between items-center mt-6">
+            <div className="font-mono text-sm text-muted-foreground">
+              <span className="text-primary">{activeIndex + 1}</span>/{totalSlides}
+            </div>
+            
+            <div className="flex gap-2">
+              <button 
+                onClick={() => emblaApi?.scrollPrev()} 
+                className="bg-primary/10 hover:bg-primary/20 text-primary rounded-full p-2 transition-colors duration-300"
+                disabled={activeIndex === 0}
+              >
+                <ArrowLeft className="h-5 w-5" />
+                <span className="sr-only">Previous</span>
+              </button>
+              <button 
+                onClick={() => emblaApi?.scrollNext()} 
+                className="bg-primary/10 hover:bg-primary/20 text-primary rounded-full p-2 transition-colors duration-300"
+                disabled={activeIndex === totalSlides - 1}
+              >
+                <ArrowRight className="h-5 w-5" />
+                <span className="sr-only">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
         
         <div className="font-mono text-sm text-primary opacity-80 mt-12">
-          &lt;/section&gt;
+          <span className="text-muted-foreground">[shubh@arch ~]$</span> <span className="animate-pulse">_</span>
         </div>
       </div>
     </section>
