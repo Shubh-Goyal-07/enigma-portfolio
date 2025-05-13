@@ -84,13 +84,13 @@ function PublicationCard({ title, authors, journal, year, abstract, doi, pdfUrl 
 export function PublicationsSection() {
   const publications = [
     {
-      title: "Novel Approach to AI-Based Computer Vision for Autonomous Systems",
-      authors: ["Shubh Goyal", "Jane Doe", "John Smith"],
-      journal: "Journal of Artificial Intelligence Research",
-      year: "2023",
-      abstract: "This paper presents a novel approach to computer vision systems for autonomous vehicles using state-of-the-art deep learning techniques. The proposed method demonstrates significant improvements in object detection under challenging environmental conditions.",
-      doi: "10.1234/abc.123456",
-      pdfUrl: "#"
+      title: "LLMGuard: Guarding against Unsafe LLM Behavior",
+      authors: ["Shubh Goyal", "Sukriti Goyal", "Nishtha Madaan", "Arnav Goel", "..."],
+      journal: "38th Annual AAAI Conference on Artificial Intelligence",
+      year: "2024",
+      abstract: "Although the rise of Large Language Models (LLMs) in enterprise settings brings new opportunities and capabilities, it also brings challenges, such as the risk of generating inappropriate, biased, or misleading content that violates regulations and can have legal concerns. To alleviate this, we present 'LLMGuard', a tool that monitors user interactions with an LLM application and flags content against specific behaviours or conversation topics. To do this robustly, LLMGuard employs an ensemble of detectors.",
+      doi: "https://doi.org/10.1609/aaai.v38i21.30566",
+      pdfUrl: "https://arxiv.org/pdf/2403.00826"
     }
   ];
 

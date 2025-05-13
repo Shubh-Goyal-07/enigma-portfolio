@@ -106,20 +106,23 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
         <p className="text-muted-foreground mb-6 font-light flex-grow">{description}</p>
         
         <div className="flex items-center space-x-4">
-          <a
-            href={githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              "flex items-center space-x-2 text-sm font-mono",
-              "hover:text-primary transition-all duration-300 group/link",
-              "border-b border-transparent hover:border-primary/50 pb-1"
-            )}
-          >
-            <Github className="h-4 w-4" />
-            <span>Source</span>
-            <ChevronRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
-          </a>
+          {githubUrl && (
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "flex items-center space-x-2 text-sm font-mono",
+                "hover:text-primary transition-all duration-300 group/link",
+                "border-b border-transparent hover:border-primary/50 pb-1"
+              )}
+            >
+              <Github className="h-4 w-4" />
+              <span>Source</span>
+              <ChevronRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
+            </a>
+          )}
+
           
           {liveUrl && (
             <a
@@ -156,36 +159,68 @@ export function ProjectsSection() {
   const projects = {
     ai: [
       {
-        title: "AI Vision Framework",
-        description: "A deep learning framework for computer vision tasks with pre-trained models for object detection and segmentation.",
+        title: "Adobe’s Fake Image and Artifact Detection Challenge",
+        description: "A deep learning solution using CNNs and a multi-headed KAN classifier for fake image detection and source attribution (diffusion or GAN), and using fine-tuned Vision Language Model (VLM) to generate artifact reports for authenticity analysis, applied to 16x16 pixel images",
         image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-        githubUrl: "#",
-        liveUrl: "#",
-        tags: ["PyTorch", "Python", "Computer Vision", "Docker"]
+        // githubUrl: "https://github.com/Shubh-Goyal-07/cloudPhysician_inter_iit",
+        // liveUrl: "#",
+        tags: ["PyTorch", "KAN", "VLMs", "Generative AI"]
       },
       {
-        title: "Neural Chat Platform",
-        description: "A real-time chat application with AI-powered moderation, sentiment analysis, and auto-responses.",
+        title: "Explainable Multilingual Architecture for Alzheimer’s Dementia Detection",
+        description: "A speech-based deep learning framework for early Alzheimer’s detection, using models like CNNs, WaveNet, and Wav2Vec2 with Grad-CAM for visualizing feature importance and identifying discriminative patterns in frequency bands.",
         image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-        githubUrl: "#",
-        tags: ["React", "Node.js", "TensorFlow.js", "WebSockets"]
-      }
+        // githubUrl: "#",
+        tags: ["PyTorch", "HuggingFace", "Speech Understanding", "Explainable AI"]
+      },
+      {
+        title: "Optimizer Design",
+        description: "Developed a modification to the Adam optimizer, improving convergence speed and performance compared to the standard Adam in some cases, with ongoing efforts to stabilize it and test it on real datasets and models.",
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+        // githubUrl: "https://github.com/Shubh-Goyal-07/cloudPhysician_inter_iit",
+        // liveUrl: "#",
+        tags: ["PyTorch", "Core DL", "Research"]
+      },
+      {
+        title: "Cloudphysician’s Vital Extraction Challenge",
+        description: "A system leveraging a fine-tuned DETR model to extract image regions with vital sign values, PARSEQ for scene text recognition, and OpenCV-based classical computer vision techniques to digitize heart rate graphs for analysis.",
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+        githubUrl: "https://github.com/Shubh-Goyal-07/cloudPhysician_inter_iit",
+        // liveUrl: "#",
+        tags: ["Image Processing", "PyTorch", "Computer Vision"]
+      },
+      { 
+        title: "FaceNet Implementation",
+        description: "Recreated the architectures from the FaceNet research paper and a Standard Siamese Network from scratch using PyTorch, and trained both models on the CelebA dataset for face recognition tasks.",
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+        githubUrl: "https://github.com/Shubh-Goyal-07/Implementation-FaceNet-SiameseNet",
+        // liveUrl: "#",
+        tags: ["PyTorch"]
+      },
     ],
     web: [
       {
-        title: "Data Visualization Dashboard",
-        description: "Interactive dashboard for visualizing complex datasets with customizable charts and ML-based predictions.",
+        title: "Literature Society IITJ Website",
+        description: "A web platform for library management and community interaction, featuring post sharing and JWT-based authentication, with a Django server deployed on AWS EC2 and a ReactJS client hosted on Netlify.",
         image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-        githubUrl: "#",
-        liveUrl: "#",
-        tags: ["D3.js", "React", "Express", "MongoDB", "ML"]
+        // githubUrl: "#",
+        liveUrl: "https://litsoc.live/",
+        tags: ["ReactJS", "Django REST Framework", "AWS"]
       },
       {
-        title: "DevOps Automation Toolkit",
-        description: "A set of tools for automating CI/CD pipelines with intelligent test prioritization and deployment strategies.",
+        title: "WebRTC-Based Video Conferencing Platform",
+        description: "A cross-platform video conferencing system featuring real-time audio/video, multi-user support, and secure peer-to-peer connectivity using WebRTC, hosted on GCP.",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-        githubUrl: "#",
-        tags: ["Go", "Docker", "Kubernetes", "CI/CD"]
+        githubUrl: "https://github.com/Shubh-Goyal-07/WebRTC",
+        tags: ["NodeJS", "ReactJS", "WebRTC"]
+      },
+      {
+        title: "Trumio’s Generative AI Product Development Challenge",
+        description: "A project milestone planner with a RAG-based chatbot built using LangChain and ChromaDB, along with an AI Learning Hub service automating video generation through diffusion models and APIs for AI avatars and learning content creation.",
+        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+        githubUrl: "https://github.com/Shubh-Goyal-07/Trumio_Team40/tree/main",
+        liveUrl: "https://drive.google.com/file/d/11LroiGM_E3jrRLyHVkXOsaxbBww7X0eB/view",
+        tags: ["Python", "LangChain", "Pinecone", "HuggingFace"]
       }
     ]
   };
@@ -265,7 +300,7 @@ export function ProjectsSection() {
           Notable implementations and code specimens
         </div>
         <div className="font-mono text-lg text-primary mb-6 inline-block border-b border-primary/30 pb-1">
-          Shit I Have Done
+          Things I've Made
         </div>
         
         {/* Category filters */}

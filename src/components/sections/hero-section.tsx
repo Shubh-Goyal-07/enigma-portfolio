@@ -101,17 +101,19 @@ export function HeroSection() {
             
             <p className="text-xl md:text-2xl mb-6 text-muted-foreground font-light tracking-wider">
               AI Engineer <span className="text-primary">&</span> Full Stack Developer
+              <br />
+              Future Billionare as well...
             </p>
             
             <div className="px-4 py-3 border border-primary/30 bg-enigma-dark/30 backdrop-blur-sm rounded-md inline-block mb-6">
               <blockquote className="italic font-light text-lg">
-                "In the symphony of chaos, I find patterns; in the noise, I decode signals."
+                "Life is simple. You make choices and you don't look back."
               </blockquote>
             </div>
             
             <div className="text-lg md:text-xl font-medium h-8 font-mono">
               <Typewriter 
-                texts={["Eat()", "Code()", "Sleep()", "Repeat()"]} 
+                texts={["Eat()", "Code()", "Play()" , "Repeat()"]} 
                 className="text-primary"
               />
             </div>
@@ -137,7 +139,7 @@ export function HeroSection() {
               <div className="relative w-72 h-72 md:w-96 md:h-96 overflow-hidden border border-primary/20 shadow-xl perspective">
                 <div className="w-full h-full transition-all duration-700 transform preserve-3d group-hover:rotate-y-180">
                   {/* Front side - Logo */}
-                  <div className="absolute w-full h-full backface-hidden">
+                  <div className="absolute w-full h-full backface-hidden rotate-y-180">
                     <img 
                       src="src/data/logo.png"
                       alt="Logo" 
@@ -148,13 +150,13 @@ export function HeroSection() {
                   </div>
                   
                   {/* Back side - Profile Photo (shows on hover) */}
-                  <div className="absolute w-full h-full backface-hidden rotate-y-180">
+                  <div className="absolute w-full h-full backface-hidden">
                     <img 
-                      src="src/data/me2.jpg"
+                      src="src/data/me.jpg"
                       alt="Profile Photo" 
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-enigma-dark/80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent"></div>
                   </div>
                 </div>
                 

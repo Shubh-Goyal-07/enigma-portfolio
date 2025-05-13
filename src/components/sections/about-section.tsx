@@ -51,22 +51,28 @@ export function AboutSection() {
                 // PERSONAL_PROFILE
               </h3>
               <p className="text-muted-foreground mb-4">
-                I'm Shubh Goyal, a software engineer and AI researcher passionate about building innovative solutions at the intersection of technology and creativity.
+              I'm Shubh Goyal, but I prefer to go by <span className="text-primary">Enigma</span>. As for my qualification, I hold a <span className="text-primary">B.Tech in Computer Science from IIT Jodhpur</span>.
               </p>
-              <p className="text-muted-foreground">
-                With expertise in both web development and artificial intelligence, I create applications that are not only functional but also intuitive and impactful.
+              <p className="text-muted-foreground mb-4">
+              Passionate about building innovative solutions at the intersection of technology and creativity, I am deeply interested in <span className="text-primary">artificial intelligence</span> and <span className="text-primary">web development.</span> 
+              </p>
+              <p className="text-muted-foreground mb-4">
+              <span className="text-primary">Leadership</span> and <span className="text-primary">entrepreneurship</span> are qualities I've developed over time, shaping my approach to problem-solving and collaboration.
               </p>
             </div>
             
             <div className="enigma-card p-6 rounded-xl">
               <h3 className="text-lg font-mono text-primary mb-3 border-b border-primary/30 pb-2 inline-block">
-                // TECH_PHILOSOPHY
+                // LIFE_PHILOSOPHY
               </h3>
               <p className="font-mono text-lg mb-3 italic">
-                <span className="text-primary">"</span>In a world of abstractions, the ability to see through layers of complexity is what separates good engineers from great ones.<span className="text-primary">"</span>
+                <span className="text-primary">"</span>There is always a brighter star to chase...<span className="text-primary">"</span>
               </p>
               <p className="text-muted-foreground">
-                I believe in writing code that is not only efficient but also maintainable and elegant. Every project is an opportunity to create something meaningful that solves real problems.
+              <span className="text-primary">Cats</span> are love, <span className="text-primary">FIFA</span> is necessary, reading <span className="text-primary">books</span> inevitable, and writing <span className="text-primary">poems</span> my luck.
+              </p>
+              <p className="text-muted-foreground">
+                These joys keep me grounded while I aim for bigger dreams.
               </p>
             </div>
           </div>
@@ -82,11 +88,11 @@ export function AboutSection() {
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-center">
                     <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
-                    React, Next.js
+                    TypeScript, JavaScript
                   </li>
                   <li className="flex items-center">
                     <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
-                    TypeScript, JavaScript
+                    React, Next.js
                   </li>
                   <li className="flex items-center">
                     <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
@@ -94,7 +100,7 @@ export function AboutSection() {
                   </li>
                   <li className="flex items-center">
                     <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
-                    Tailwind, CSS
+                    Django
                   </li>
                 </ul>
               </div>
@@ -108,24 +114,34 @@ export function AboutSection() {
                   </li>
                   <li className="flex items-center">
                     <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
+                    Hugging Face
+                  </li>
+                  <li className="flex items-center">
+                    <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
                     Computer Vision
-                  </li>
-                  <li className="flex items-center">
-                    <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
-                    NLP, Transformers
-                  </li>
-                  <li className="flex items-center">
-                    <span className="h-1 w-1 bg-primary rounded-full mr-2"></span>
-                    Machine Learning
                   </li>
                 </ul>
               </div>
             </div>
             
             <div className="mt-8">
+              <h4 className="font-mono text-foreground mb-2">Tools and Platforms</h4>
+              <div className="flex flex-wrap gap-2">
+                {["Git/GitHub", "Docker", "AWS", "LaTeX"].map((interest) => (
+                  <span 
+                    key={interest}
+                    className="px-2 py-1 text-xs rounded bg-primary/10 text-primary border border-primary/20"
+                  >
+                    {interest}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8">
               <h4 className="font-mono text-foreground mb-2">Interests</h4>
               <div className="flex flex-wrap gap-2">
-                {["Open Source", "LLMs", "Web3", "System Design", "UI/UX", "Research"].map((interest) => (
+                {["Research", "System Design", "Computer Vision", "Core Deep Learning"].map((interest) => (
                   <span 
                     key={interest}
                     className="px-2 py-1 text-xs rounded bg-primary/10 text-primary border border-primary/20"

@@ -74,7 +74,7 @@ export function ContactSection() {
         </h2>
         <div className="max-w-md mb-12">
           <p className="font-light mb-4">
-            Feel free to get in touch with me. I'm always open to discussing new projects, creative ideas or opportunities.
+            Feel free to get in touch with me. Always open to new projects and ideas.
           </p>
           <div className="font-mono text-sm text-primary/70">&gt; awaiting_message...</div>
         </div>

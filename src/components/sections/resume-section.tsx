@@ -80,33 +80,37 @@ function Achievement({ title, description, index }: AchievementProps) {
 export function ResumeSection() {
   const experiences = [
     {
-      company: "Tech Corp",
-      role: "AI Research Intern",
-      duration: "Jun 2023 - Aug 2023",
+      company: "IBM Research, India",
+      role: "GRM'23 NLP Research Intern",
+      duration: "May 2023 - Aug 2023",
       description: [
-        "Developed neural network architectures for image recognition tasks, achieving 15% performance improvement.",
-        "Implemented data preprocessing pipelines that reduced training time by 30%.",
-        "Collaborated with senior researchers to publish findings at industry conferences."
+        "Developed pipeline for bias/toxicity detection in outputs of large language models and integrated GPT-2, BERT and other language models from Hugging Face for testing.",
+        "Successful AAAI ’24 Demonstartion Track Publication."
+      ]
+    }, 
+    {
+      company: "5 Point AI Labs",
+      role: "SWE Intern",
+      duration: "May 2024 - Feb 2025",
+      description: [
+        "Designed and developed a core dynamic multi-agent AI system capable of creating an assistant for any FastAPI application.",
+        "Techstack, Frameworks, and Tools used: Python, LangGraph, FastAPI, MongoDB, ASP .NET Core, Postman."
       ]
     }
   ];
 
   const achievements = [
+    // {
+    //   title: "Open Source Contribution",
+    //   description: "Active contributor to major open-source AI libraries with 10+ merged PRs."
+    // },
     {
-      title: "AI Research Publication",
-      description: "Published research paper on advanced neural network architectures in top AI conference."
+      title: "Ranked 9th - Inter IIT Techmeet 12.0",
+      description: "Trumio’s High Prep Challenge"
     },
     {
-      title: "Open Source Contribution",
-      description: "Active contributor to major open-source AI libraries with 10+ merged PRs."
-    },
-    {
-      title: "Hackathon Winner",
-      description: "First place at International AI Hackathon for innovative solution to real-world problems."
-    },
-    {
-      title: "Technical Speaker",
-      description: "Regular speaker at tech conferences on AI and full stack development topics."
+      title: "Ranked 10th - Inter IIT Techmeet 12.0",
+      description: "Cloudphysician’s Mid Prep Challenge"
     }
   ];
 
