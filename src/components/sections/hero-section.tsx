@@ -141,7 +141,7 @@ export function HeroSection() {
                   {/* Front side - Logo */}
                   <div className="absolute w-full h-full backface-hidden rotate-y-180">
                     <img 
-                      src="src/data/logo.png"
+                      src="https://github.com/Shubh-Goyal-07/enigma-portfolio/blob/main/src/data/logo.png?raw=true"
                       alt="Logo" 
                       className="w-full h-full object-cover"
                     />
@@ -152,7 +152,7 @@ export function HeroSection() {
                   {/* Back side - Profile Photo (shows on hover) */}
                   <div className="absolute w-full h-full backface-hidden">
                     <img 
-                      src="src/data/me.jpg"
+                      src="https://github.com/Shubh-Goyal-07/enigma-portfolio/blob/main/src/data/me.jpg?raw=true"
                       alt="Profile Photo" 
                       className="w-full h-full object-cover"
                     />

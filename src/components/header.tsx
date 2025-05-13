@@ -54,7 +54,7 @@ export function Header() {
     >
       <div className="container h-full flex items-center justify-between">
         <div className="font-mono font-bold text-2xl flex items-center">
-          <img src="src/data/logo.png" alt="Enigma Logo" className="h-12 w-12 mr-2" />
+          <img src="https://github.com/Shubh-Goyal-07/enigma-portfolio/blob/main/src/data/logo.png?raw=true" alt="Enigma Logo" className="h-12 w-12 mr-2" />
           <span className="dark:text-white">Enigma</span>
           <span className="text-primary">_</span>
         </div>
