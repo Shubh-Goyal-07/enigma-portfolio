@@ -63,10 +63,10 @@ function Achievement({ title, description, index }: AchievementProps) {
 
 export function ResumeSection() {
   const skills = {
-    frontend: ["React", "TypeScript", "NextJS", "TailwindCSS", "Redux"],
-    backend: ["NodeJS", "Express", "MongoDB", "SQL", "AWS", "Firebase"],
-    ai: ["Python", "TensorFlow", "PyTorch", "NLP", "Computer Vision", "MLOps"],
-    tools: ["Git", "Docker", "CI/CD", "Jest", "Cypress", "Figma"]
+    lang: ["Python", "JavaScript", "TypeScript", "C++"],
+    web: ["React", "TypeScript", "NextJS", "NodeJS", "Express", "MongoDB", "SQL"],
+    ai: ["PyTorch", "TensorFlow", "HUggingFace", "Scikit-learn"],
+    tools: ["Git/GitHub", "Docker", "CI/CD", "AWS", "Figma"]
   };
 
   const achievements = [
@@ -142,14 +142,14 @@ export function ResumeSection() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <SkillCategory 
-              title="Frontend Development" 
-              skills={skills.frontend} 
-              icon={<Globe className="h-5 w-5" />}
+              title="Languages" 
+              skills={skills.lang} 
+              icon={<Database className="h-5 w-5" />}
             />
             <SkillCategory 
-              title="Backend Development" 
-              skills={skills.backend} 
-              icon={<Database className="h-5 w-5" />}
+              title="Web Development" 
+              skills={skills.web} 
+              icon={<Globe className="h-5 w-5" />}
             />
             <SkillCategory 
               title="AI & Machine Learning" 

@@ -82,7 +82,7 @@ export function Header() {
 
         {/* Mobile menu button */}
         <div className="flex items-center md:hidden gap-2">
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
           <Button 
             variant="ghost" 
             size="icon" 
