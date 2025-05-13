@@ -134,7 +134,7 @@ export function HeroSection() {
           <div className="order-1 md:order-2 flex justify-center">
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
-              <div className="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden border border-primary/20 shadow-xl perspective">
+              <div className="relative w-72 h-72 md:w-96 md:h-96 overflow-hidden border border-primary/20 shadow-xl perspective">
                 <div className="w-full h-full transition-all duration-700 transform preserve-3d group-hover:rotate-y-180">
                   {/* Front side - Logo */}
                   <div className="absolute w-full h-full backface-hidden">

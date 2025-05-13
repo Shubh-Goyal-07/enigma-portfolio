@@ -78,6 +78,15 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Vertical text for email */
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.1em;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
   /* Typewriter effect styling */
   .typewriter {
     position: relative;

@@ -6,12 +6,15 @@ import { ResumeSection } from "@/components/sections/resume-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { PublicationsSection } from "@/components/sections/publications-section";
 import { ContactSection } from "@/components/sections/contact-section";
-import { Footer } from "@/components/footer";
+import { SocialLinksSidebar } from "@/components/social-links-sidebar";
+import { EmailSidebar } from "@/components/email-sidebar";
 
 const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+      <SocialLinksSidebar />
+      <EmailSidebar />
       <main className="flex-1">
         <HeroSection />
         <AboutSection />
@@ -20,7 +23,6 @@ const Index = () => {
         <PublicationsSection />
         <ContactSection />
       </main>
-      <Footer />
     </div>
   );
 };
