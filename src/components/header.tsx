@@ -53,7 +53,8 @@ export function Header() {
       )}
     >
       <div className="container h-full flex items-center justify-between">
-        <div className="font-mono font-bold text-2xl">
+        <div className="font-mono font-bold text-2xl flex items-center">
+          <img src="/logo.png" alt="Enigma Logo" className="h-8 w-8 mr-2" />
           <span className="dark:text-white">Enigma</span>
           <span className="text-primary">_</span>
         </div>
@@ -77,7 +78,7 @@ export function Header() {
               <span className="relative z-10">{section.label}</span>
             </a>
           ))}
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
         </nav>
 
         {/* Mobile menu button */}

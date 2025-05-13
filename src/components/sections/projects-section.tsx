@@ -2,6 +2,14 @@
 import { cn } from "@/lib/utils";
 import { Github, ExternalLink, ChevronRight, Code, Lock } from "lucide-react";
 import { useState } from "react";
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 interface ProjectCardProps {
   title: string;
@@ -124,38 +132,47 @@ function ProjectCard({ title, description, image, githubUrl, liveUrl, tags }: Pr
 }
 
 export function ProjectsSection() {
-  const projects = [
-    {
-      title: "AI Vision Framework",
-      description: "A deep learning framework for computer vision tasks with pre-trained models for object detection and segmentation.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-      githubUrl: "#",
-      liveUrl: "#",
-      tags: ["PyTorch", "Python", "Computer Vision", "Docker"]
-    },
-    {
-      title: "Neural Chat Platform",
-      description: "A real-time chat application with AI-powered moderation, sentiment analysis, and auto-responses.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-      githubUrl: "#",
-      tags: ["React", "Node.js", "TensorFlow.js", "WebSockets"]
-    },
-    {
-      title: "Data Visualization Dashboard",
-      description: "Interactive dashboard for visualizing complex datasets with customizable charts and ML-based predictions.",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-      githubUrl: "#",
-      liveUrl: "#",
-      tags: ["D3.js", "React", "Express", "MongoDB", "ML"]
-    },
-    {
-      title: "DevOps Automation Toolkit",
-      description: "A set of tools for automating CI/CD pipelines with intelligent test prioritization and deployment strategies.",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-      githubUrl: "#",
-      tags: ["Go", "Docker", "Kubernetes", "CI/CD"]
-    }
-  ];
+  const [activeCategory, setActiveCategory] = useState("all");
+  
+  const projects = {
+    ai: [
+      {
+        title: "AI Vision Framework",
+        description: "A deep learning framework for computer vision tasks with pre-trained models for object detection and segmentation.",
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+        githubUrl: "#",
+        liveUrl: "#",
+        tags: ["PyTorch", "Python", "Computer Vision", "Docker"]
+      },
+      {
+        title: "Neural Chat Platform",
+        description: "A real-time chat application with AI-powered moderation, sentiment analysis, and auto-responses.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+        githubUrl: "#",
+        tags: ["React", "Node.js", "TensorFlow.js", "WebSockets"]
+      }
+    ],
+    web: [
+      {
+        title: "Data Visualization Dashboard",
+        description: "Interactive dashboard for visualizing complex datasets with customizable charts and ML-based predictions.",
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+        githubUrl: "#",
+        liveUrl: "#",
+        tags: ["D3.js", "React", "Express", "MongoDB", "ML"]
+      },
+      {
+        title: "DevOps Automation Toolkit",
+        description: "A set of tools for automating CI/CD pipelines with intelligent test prioritization and deployment strategies.",
+        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+        githubUrl: "#",
+        tags: ["Go", "Docker", "Kubernetes", "CI/CD"]
+      }
+    ]
+  };
+  
+  const allProjects = [...projects.ai, ...projects.web];
+  const displayProjects = activeCategory === "all" ? allProjects : projects[activeCategory as 'ai' | 'web'];
 
   return (
     <section
@@ -201,23 +218,40 @@ export function ProjectsSection() {
         <div className="font-mono text-xs text-muted-foreground mb-4">
           Notable implementations and code specimens
         </div>
-        <div className="font-mono text-lg text-primary mb-12 inline-block border-b border-primary/30 pb-1">
-          Shit I Have Accomplished
+        <div className="font-mono text-lg text-primary mb-6 inline-block border-b border-primary/30 pb-1">
+          Shit I Have Done
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              title={project.title}
-              description={project.description}
-              image={project.image}
-              githubUrl={project.githubUrl}
-              liveUrl={project.liveUrl}
-              tags={project.tags}
-            />
-          ))}
+        {/* Category filters */}
+        <div className="mb-8">
+          <ToggleGroup type="single" value={activeCategory} onValueChange={(value) => value && setActiveCategory(value)}>
+            <ToggleGroupItem value="all" className="font-mono text-sm">All</ToggleGroupItem>
+            <ToggleGroupItem value="ai" className="font-mono text-sm">AI / ML</ToggleGroupItem>
+            <ToggleGroupItem value="web" className="font-mono text-sm">Web Dev</ToggleGroupItem>
+          </ToggleGroup>
         </div>
+        
+        {/* Projects carousel */}
+        <Carousel className="w-full">
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {displayProjects.map((project, index) => (
+              <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/2">
+                <ProjectCard
+                  title={project.title}
+                  description={project.description}
+                  image={project.image}
+                  githubUrl={project.githubUrl}
+                  liveUrl={project.liveUrl}
+                  tags={project.tags}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex justify-end mt-4 gap-2">
+            <CarouselPrevious className="static transform-none" />
+            <CarouselNext className="static transform-none" />
+          </div>
+        </Carousel>
         
         <div className="font-mono text-sm text-primary opacity-80 mt-12">
           &lt;/section&gt;
