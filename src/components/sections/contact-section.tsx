@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Send, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "emailjs-com";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -16,19 +17,30 @@ export function ContactSection() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCaptcha = (token: string | null) => {
+    setCaptchaToken(token);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      toast({
+        title: "CAPTCHA Required",
+        description: "Please complete the CAPTCHA verification.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-    
+
     const serviceID = "service_9o1feac"; // Replace with your EmailJS Service ID
     const templateID = "template_dh73pwa"; // Replace with your EmailJS Template ID
     const userID = "3yVBhQdaw3cImEt0t"; // Replace with your EmailJS User ID
@@ -42,6 +54,7 @@ export function ContactSection() {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
+          "g-recaptcha-response": captchaToken, // Optional for backend validation
         },
         userID
       );
@@ -57,8 +70,8 @@ export function ContactSection() {
           subject: "",
           message: "",
         });
+        setCaptchaToken(null); // Reset CAPTCHA token after success
       } else {
-        // console.error("Error sending email:", response);
         toast({
           title: "Error",
           description: "Failed to send the message. Please try again later.",
@@ -203,7 +216,7 @@ export function ContactSection() {
                   className="bg-enigma-dark/30 border-primary/20 focus-visible:border-primary/50 rounded-md placeholder:text-muted-foreground/50 font-light"
                 />
               </div>
-              <div>
+              <div >
                 <Textarea
                   name="message"
                   placeholder="Your Message"
@@ -213,23 +226,31 @@ export function ContactSection() {
                   className="min-h-32 bg-enigma-dark/30 border-primary/20 focus-visible:border-primary/50 rounded-md placeholder:text-muted-foreground/50 resize-none font-light"
                 />
               </div>
-              <Button 
-                type="submit" 
-                className="w-full bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30 transition-all duration-300 font-mono"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <span className="animate-pulse">Processing</span>
-                    <span className="inline-block">...</span>
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <span>Send Message</span>
-                    <Send className="h-4 w-4" />
-                  </span>
-                )}
-              </Button>
+              <div className="flex flex-row justify-between gap-8">  
+                <ReCAPTCHA
+                  sitekey="6Lc9TzkrAAAAAP9Z9tFXZRap3NaErnB8tr0zCD9b" // Replace with your site key
+                  onChange={handleCaptcha}
+                  className="flex-1 border border-primary/30 rounded-md"
+                />
+                
+                <Button 
+                  type="submit" 
+                  className="flex-1 bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30 transition-all duration-300 font-mono rounded-md h-[78px]" // Match size and style
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <span className="animate-pulse">Processing</span>
+                      <span className="inline-block">...</span>
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <span>Send Message</span>
+                      <Send className="h-4 w-4" />
+                    </span>
+                  )}
+                </Button>
+              </div>
             </form>
           </div>
         </div>
