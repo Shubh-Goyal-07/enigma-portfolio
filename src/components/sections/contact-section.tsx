@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Send, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "emailjs-com";
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -26,22 +27,54 @@ export function ContactSection() {
     setIsSubmitting(true);
     
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
     
-    toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
-    
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
-    
-    setIsSubmitting(false);
+    const serviceID = "service_9o1feac"; // Replace with your EmailJS Service ID
+    const templateID = "template_dh73pwa"; // Replace with your EmailJS Template ID
+    const userID = "3yVBhQdaw3cImEt0t"; // Replace with your EmailJS User ID
+
+    try {
+      const response = await emailjs.send(
+        serviceID,
+        templateID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        userID
+      );
+
+      if (response.status === 200) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        // console.error("Error sending email:", response);
+        toast({
+          title: "Error",
+          description: "Failed to send the message. Please try again later.",
+        });
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send the message. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
 
   return (
     <section
@@ -207,4 +240,4 @@ export function ContactSection() {
       </div>
     </section>
   );
-}
+};
