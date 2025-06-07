@@ -161,7 +161,7 @@ export function ProjectsSection() {
       {
         title: "Adobe’s Fake Image and Artifact Detection Challenge",
         description: "A deep learning solution using CNNs and a multi-headed KAN classifier for fake image detection and source attribution (diffusion or GAN), and using fine-tuned Vision Language Model (VLM) to generate artifact reports for authenticity analysis, applied to 16x16 pixel images",
-        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
         // githubUrl: "https://github.com/Shubh-Goyal-07/cloudPhysician_inter_iit",
         // liveUrl: "#",
         tags: ["PyTorch", "KAN", "VLMs", "Generative AI"]
@@ -184,7 +184,7 @@ export function ProjectsSection() {
       {
         title: "Cloudphysician’s Vital Extraction Challenge",
         description: "A system leveraging a fine-tuned DETR model to extract image regions with vital sign values, PARSEQ for scene text recognition, and OpenCV-based classical computer vision techniques to digitize heart rate graphs for analysis.",
-        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+        image: "https://github.com/Shubh-Goyal-07/enigma-portfolio/blob/main/src/data/cloudphy.png?raw=true",
         githubUrl: "https://github.com/Shubh-Goyal-07/cloudPhysician_inter_iit",
         // liveUrl: "#",
         tags: ["Image Processing", "PyTorch", "Computer Vision"]

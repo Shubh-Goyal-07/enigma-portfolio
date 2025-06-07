@@ -1,7 +1,7 @@
 
 import { Typewriter } from "@/components/typewriter";
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
+import { FileUser } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function HeroSection() {
@@ -120,15 +120,16 @@ export function HeroSection() {
             
             <div className="mt-8">
               <a 
-                href="#contact" 
+                href="https://drive.google.com/file/d/1j9wh-4xjqhcUYhfgTrymLi7wnCcxjAYJ/view?usp=sharing"
+                target="_blank"
                 className={cn(
-                  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium",
+                  "inline-flex items-center justify-center gap-4 rounded-md text-sm font-medium",
                   "bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30",
                   "h-12 px-8 py-2 transition-all duration-300 group"
                 )}
               >
-                <span>Get In Touch</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <FileUser className="h-5 w-5 transition-transform duration-300" />
+                <span>Resume / CV</span>
               </a>
             </div>
           </div>
