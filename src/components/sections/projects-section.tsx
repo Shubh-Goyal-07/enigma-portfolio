@@ -161,7 +161,7 @@ export function ProjectsSection() {
       {
         title: "Adobe’s Fake Image and Artifact Detection Challenge",
         description: "A deep learning solution using CNNs and a multi-headed KAN classifier for fake image detection and source attribution (diffusion or GAN), and using fine-tuned Vision Language Model (VLM) to generate artifact reports for authenticity analysis, applied to 16x16 pixel images",
-        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+        image: "https://github.com/Shubh-Goyal-07/enigma-portfolio/blob/main/src/data/adobe.png?raw=true",
         // githubUrl: "https://github.com/Shubh-Goyal-07/cloudPhysician_inter_iit",
         // liveUrl: "#",
         tags: ["PyTorch", "KAN", "VLMs", "Generative AI"]
