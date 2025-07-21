@@ -96,6 +96,14 @@ export function ResumeSection() {
         "Designed and developed a core dynamic multi-agent AI system capable of creating an assistant for any FastAPI application.",
         "Techstack, Frameworks, and Tools used: Python, LangGraph, FastAPI, MongoDB, ASP .NET Core, Postman."
       ]
+    },
+    {
+      company: "AiraMatrix Pvt Ltd",
+      role: "Trainee Engineer (AI CV)",
+      duration: "July 2025 - Present",
+      description: [
+        "Just Joined :)"
+      ]
     }
   ];
 
